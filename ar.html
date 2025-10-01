@@ -119,7 +119,10 @@
           const el = document.createElement("a-box");
           el.setAttribute("gps-new-entity-place", `latitude: ${lat}; longitude: ${lon}`);
           el.setAttribute("color", "blue");
-          el.setAttribute("scale", "5 5 5");
+          //el.setAttribute("scale", "5 5 5");
+          el.setAttribute("width", "0.3");   // 30 cm de ancho
+          el.setAttribute("height", "0.3");  // 30 cm de alto
+          el.setAttribute("depth", "0.3");   // 30 cm de profundidad
           document.querySelector("a-scene").appendChild(el);
         }
 

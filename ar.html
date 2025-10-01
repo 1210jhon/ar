@@ -118,7 +118,7 @@
         if (f.geometry.type === "Point") {
           const [lon, lat] = f.geometry.coordinates;
           const el = document.createElement("a-box");
-          el.setAttribute("gps-entity-place", `latitude: ${lat}; longitude: ${lon}`);
+          el.setAttribute("gps-new-entity-place", `latitude: ${lat}; longitude: ${lon}`);
           el.setAttribute("color", "blue");
           el.setAttribute("scale", "5 5 5");
           document.querySelector("a-scene").appendChild(el);

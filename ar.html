@@ -130,7 +130,7 @@
           const coords = f.geometry.coordinates;
           coords.forEach(([lon, lat]) => {
             const sphere = document.createElement("a-sphere");
-            sphere.setAttribute("gps-entity-place", `latitude: ${lat}; longitude: ${lon}`);
+            sphere.setAttribute("gps-new-entity-place", `latitude: ${lat}; longitude: ${lon}`);
             sphere.setAttribute("radius", "1.5");
             sphere.setAttribute("color", "red");
             document.querySelector("a-scene").appendChild(sphere);

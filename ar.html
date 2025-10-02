@@ -142,22 +142,20 @@
             const [lon1, lat1] = coords[i];
             const [lon2, lat2] = coords[i + 1];
         
+            // Distancias reales en metros
+            const dx = gpsToMeters(lat1, lon1, lat1, lon2); // Este-oeste
+            const dz = gpsToMeters(lat1, lon1, lat2, lon1); // Norte-sur
+            const length = Math.sqrt(dx*dx + dz*dz);
+        
+            // Punto medio
             const midLat = (lat1 + lat2) / 2;
             const midLon = (lon1 + lon2) / 2;
         
-            // Distancia real en metros
-            const length = gpsToMeters(lat1, lon1, lat2, lon2);
-        
-            // Calcular ángulo horizontal
-            const dx = lon2 - lon1;
-            const dz = lat2 - lat1;
+            // Ángulo horizontal
             const angleY = Math.atan2(dx, dz) * 180 / Math.PI;
         
             const entity = document.createElement("a-entity");
-            entity.setAttribute(
-              "gps-new-entity-place",
-              `latitude: ${midLat}; longitude: ${midLon}`
-            );
+            entity.setAttribute("gps-new-entity-place", `latitude: ${midLat}; longitude: ${midLon}`);
         
             const cylinder = document.createElement("a-cylinder");
             cylinder.setAttribute("radius", 0.05);

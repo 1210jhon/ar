@@ -110,21 +110,27 @@
       geojson.features.forEach(f => {
         if (f.geometry.type === "Point") {
           const [lon, lat] = f.geometry.coordinates;
-          const el = document.createElement("a-box");
-          el.setAttribute("gps-new-entity-place", `latitude: ${lat}; longitude: ${lon}`);
-          el.setAttribute("color", "blue");
-          //el.setAttribute("scale", "5 5 5");
-          el.setAttribute("width", "0.3");   // 30 cm de ancho
-          el.setAttribute("height", "0.5");  // 30 cm de alto
-          el.setAttribute("depth", "0.3");   // 30 cm de profundidad
-          document.querySelector("a-scene").appendChild(el);
-
+          const entity = document.createElement("a-entity");
+          entity.setAttribute("gps-new-entity-place", `latitude: ${lat}; longitude: ${lon}`);
+          
+          // Cubo
+          const box = document.createElement("a-box");
+          box.setAttribute("color", "blue");
+          box.setAttribute("width", "0.3");
+          box.setAttribute("height", "0.5");
+          box.setAttribute("depth", "0.3");
+          entity.appendChild(box);
+          
+          // Texto
           const text = document.createElement("a-text");
           text.setAttribute("value", f.properties.name);
           text.setAttribute("color", "black");
           text.setAttribute("align", "center");
           text.setAttribute("position", "0 0.6 0"); // arriba del cubo
-          document.querySelector("a-scene").appendChild(el);
+          entity.appendChild(text);
+          
+          // Agregar todo a la escena
+          document.querySelector("a-scene").appendChild(entity);
         }
 
         if (f.geometry.type === "LineString") {

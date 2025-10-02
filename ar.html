@@ -106,12 +106,18 @@
       console.log("📍 Posición actual cámara:", lat, lon);
 
       if (window._geojsonAdded) return; // Evita duplicados
-
+      
+      
+      const depth = 1; // metros bajo tierra
+      
       geojson.features.forEach(f => {
         if (f.geometry.type === "Point") {
           const [lon, lat] = f.geometry.coordinates;
+          
           const entity = document.createElement("a-entity");
           entity.setAttribute("gps-new-entity-place", `latitude: ${lat}; longitude: ${lon}`);
+          // Movemos todo el objeto hacia abajo
+          entity.setAttribute("position", `0 -${depth} 0`);
           
           // Cubo
           const box = document.createElement("a-box");
@@ -119,18 +125,19 @@
           box.setAttribute("width", "0.3");
           box.setAttribute("height", "0.5");
           box.setAttribute("depth", "0.3");
+          // Opcional: centrar cubo respecto al eje Y
+          box.setAttribute("position", `0 ${box.getAttribute('height')/2} 0`);
           entity.appendChild(box);
           
-          // Texto
+          // Texto (opcional, puedes dejarlo sobre el suelo)
           const text = document.createElement("a-text");
           text.setAttribute("value", f.properties.name);
           text.setAttribute("color", "black");
           text.setAttribute("align", "center");
-          text.setAttribute("position", "0 0.6 0"); // arriba del cubo
+          // Posición relativa al cubo
+          text.setAttribute("position", `0 ${box.getAttribute('height') + 0.1} 0`);
           entity.appendChild(text);
-          
-          // Agregar todo a la escena
-          document.querySelector("a-scene").appendChild(entity);
+
         }
 
         if (f.geometry.type === "LineString") {
@@ -163,6 +170,8 @@
               "look-at",
               `[gps-new-entity-place='latitude: ${lat2}; longitude: ${lon2}']`
             );
+
+            entity.setAttribute("position", `0 -${depth} 0`);
         
             // Cilindro que representa la tubería
             const cylinder = document.createElement("a-cylinder");

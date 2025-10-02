@@ -135,7 +135,7 @@
             cylinder.setAttribute("radius", 0.02);   // grosor
             cylinder.setAttribute("height", length);
             cylinder.setAttribute("color", "red");
-            cylinder.setAttribute("rotation", `90 ${angle} 0`); // para que se extienda en X-Z
+            cylinder.setAttribute("rotation", `0 ${angle} 90`); // para que se extienda en X-Z
             entity.appendChild(cylinder);
         
             document.querySelector("a-scene").appendChild(entity);

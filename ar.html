@@ -110,6 +110,13 @@
           el.setAttribute("height", "0.5");  // 30 cm de alto
           el.setAttribute("depth", "0.3");   // 30 cm de profundidad
           document.querySelector("a-scene").appendChild(el);
+
+          const text = document.createElement("a-text");
+          text.setAttribute("value", f.properties.name);
+          text.setAttribute("color", "black");
+          text.setAttribute("align", "center");
+          text.setAttribute("position", "0 0.6 0"); // arriba del cubo
+          entity.appendChild(text);
         }
 
         if (f.geometry.type === "LineString") {

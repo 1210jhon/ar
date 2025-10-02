@@ -115,28 +115,28 @@
             const [lon2, lat2] = coords[i + 1];
         
             // Distancias reales en metros
-            const dx = gpsToMeters(lat1, lon1, lat1, lon2); // Este-oeste
-            const dz = gpsToMeters(lat1, lon1, lat2, lon1); // Norte-sur
+            const dx = gpsToMeters(lat1, lon1, lat1, lon2); // Este-Oeste
+            const dz = gpsToMeters(lat1, lon1, lat2, lon1); // Norte-Sur
             const length = Math.sqrt(dx*dx + dz*dz);
-        
-            // Punto medio
+            
+            // Ángulo horizontal correcto
+            const angleY = Math.atan2(dz, dx) * 180 / Math.PI;
+            
+            // Entidad en el punto medio
             const midLat = (lat1 + lat2) / 2;
             const midLon = (lon1 + lon2) / 2;
-        
-            // Ángulo horizontal manual
-            const angleY = Math.atan2(dx, dz) * 180 / Math.PI;
-        
-            // Entidad padre en el punto medio
+            
             const entity = document.createElement("a-entity");
             entity.setAttribute("gps-new-entity-place", `latitude: ${midLat}; longitude: ${midLon}`);
-        
+            
             // Cilindro
             const cylinder = document.createElement("a-cylinder");
             cylinder.setAttribute("radius", 0.05);
             cylinder.setAttribute("height", length);
             cylinder.setAttribute("color", "red");
-            cylinder.setAttribute("rotation", `0 ${angleY} 90`); // rotación manual
-        
+            // rotación: 90° X para que crezca hacia adelante + rotación Y hacia el objetivo
+            cylinder.setAttribute("rotation", `90 ${-angleY} 0`);
+            
             entity.appendChild(cylinder);
             document.querySelector("a-scene").appendChild(entity);
           }

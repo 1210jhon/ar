@@ -35,43 +35,51 @@
     const geojson = {
       "type": "FeatureCollection",
       "features": [
+        // Tanque Principal
         { "type": "Feature", "properties": { "type": "Tanque", "name": "Tanque Principal" }, "geometry": { "type": "Point", "coordinates": [-78.930637, -7.352577] } },
-        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 1" }, "geometry": { "type": "Point", "coordinates": [-78.930637, -7.352567] } },
-        { "type": "Feature", "properties": { "type": "Válvula", "name": "Válvula 1" }, "geometry": { "type": "Point", "coordinates": [-78.930627, -7.352577] } },
-        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 2" }, "geometry": { "type": "Point", "coordinates": [-78.930647, -7.352577] } },
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 1" }, "geometry": { "type": "Point", "coordinates": [-78.930637, -7.352847] } },
+        { "type": "Feature", "properties": { "type": "Válvula", "name": "Válvula 1" }, "geometry": { "type": "Point", "coordinates": [-78.930367, -7.352577] } },
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 2" }, "geometry": { "type": "Point", "coordinates": [-78.930907, -7.352577] } },
     
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque - Pozo 1" }, "geometry": { "type": "LineString", "coordinates": [[-78.930637, -7.352577], [-78.930637, -7.352567]] } },
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque - Válvula 1" }, "geometry": { "type": "LineString", "coordinates": [[-78.930637, -7.352577], [-78.930627, -7.352577]] } },
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque - Pozo 2" }, "geometry": { "type": "LineString", "coordinates": [[-78.930637, -7.352577], [-78.930647, -7.352577]] } },
+        // Tuberías del Tanque Principal
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque - Pozo 1" }, "geometry": { "type": "LineString", "coordinates": [[-78.930637, -7.352577], [-78.930637, -7.352847]] } },
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque - Válvula 1" }, "geometry": { "type": "LineString", "coordinates": [[-78.930637, -7.352577], [-78.930367, -7.352577]] } },
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque - Pozo 2" }, "geometry": { "type": "LineString", "coordinates": [[-78.930637, -7.352577], [-78.930907, -7.352577]] } },
     
-        { "type": "Feature", "properties": { "type": "Tanque", "name": "Tanque Secundario" }, "geometry": { "type": "Point", "coordinates": [-78.930600, -7.352600] } },
-        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 3" }, "geometry": { "type": "Point", "coordinates": [-78.930590, -7.352590] } },
-        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 4" }, "geometry": { "type": "Point", "coordinates": [-78.930580, -7.352580] } },
-        { "type": "Feature", "properties": { "type": "Válvula", "name": "Válvula 2" }, "geometry": { "type": "Point", "coordinates": [-78.930570, -7.352570] } },
+        // Tanque Secundario
+        { "type": "Feature", "properties": { "type": "Tanque", "name": "Tanque Secundario" }, "geometry": { "type": "Point", "coordinates": [-78.930557, -7.352647] } },
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 3" }, "geometry": { "type": "Point", "coordinates": [-78.930517, -7.352607] } },
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 4" }, "geometry": { "type": "Point", "coordinates": [-78.930597, -7.352597] } },
+        { "type": "Feature", "properties": { "type": "Válvula", "name": "Válvula 2" }, "geometry": { "type": "Point", "coordinates": [-78.930587, -7.352567] } },
     
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Secundario - Pozo 3" }, "geometry": { "type": "LineString", "coordinates": [[-78.930600, -7.352600], [-78.930590, -7.352590]] } },
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Secundario - Pozo 4" }, "geometry": { "type": "LineString", "coordinates": [[-78.930600, -7.352600], [-78.930580, -7.352580]] } },
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Secundario - Válvula 2" }, "geometry": { "type": "LineString", "coordinates": [[-78.930600, -7.352600], [-78.930570, -7.352570]] } },
+        // Tuberías del Tanque Secundario
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Secundario - Pozo 3" }, "geometry": { "type": "LineString", "coordinates": [[-78.930557, -7.352647], [-78.930517, -7.352607]] } },
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Secundario - Pozo 4" }, "geometry": { "type": "LineString", "coordinates": [[-78.930557, -7.352647], [-78.930597, -7.352597]] } },
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Secundario - Válvula 2" }, "geometry": { "type": "LineString", "coordinates": [[-78.930557, -7.352647], [-78.930587, -7.352567]] } },
     
-        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 5" }, "geometry": { "type": "Point", "coordinates": [-78.930560, -7.352560] } },
-        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 6" }, "geometry": { "type": "Point", "coordinates": [-78.930550, -7.352550] } },
-        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 7" }, "geometry": { "type": "Point", "coordinates": [-78.930540, -7.352540] } },
-        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 8" }, "geometry": { "type": "Point", "coordinates": [-78.930530, -7.352530] } },
-        { "type": "Feature", "properties": { "type": "Válvula", "name": "Válvula 3" }, "geometry": { "type": "Point", "coordinates": [-78.930520, -7.352520] } },
+        // Pozos adicionales
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 5" }, "geometry": { "type": "Point", "coordinates": [-78.930497, -7.352537] } },
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 6" }, "geometry": { "type": "Point", "coordinates": [-78.930467, -7.352517] } },
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 7" }, "geometry": { "type": "Point", "coordinates": [-78.930437, -7.352497] } },
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 8" }, "geometry": { "type": "Point", "coordinates": [-78.930407, -7.352477] } },
+        { "type": "Feature", "properties": { "type": "Válvula", "name": "Válvula 3" }, "geometry": { "type": "Point", "coordinates": [-78.930377, -7.352457] } },
     
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Pozo 5 - Válvula 3" }, "geometry": { "type": "LineString", "coordinates": [[-78.930560, -7.352560], [-78.930520, -7.352520]] } },
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Pozo 6 - Válvula 3" }, "geometry": { "type": "LineString", "coordinates": [[-78.930550, -7.352550], [-78.930520, -7.352520]] } },
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Pozo 7 - Válvula 3" }, "geometry": { "type": "LineString", "coordinates": [[-78.930540, -7.352540], [-78.930520, -7.352520]] } },
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Pozo 8 - Válvula 3" }, "geometry": { "type": "LineString", "coordinates": [[-78.930530, -7.352530], [-78.930520, -7.352520]] } },
+        // Tuberías pozos a válvula 3
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Pozo 5 - Válvula 3" }, "geometry": { "type": "LineString", "coordinates": [[-78.930497, -7.352537], [-78.930377, -7.352457]] } },
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Pozo 6 - Válvula 3" }, "geometry": { "type": "LineString", "coordinates": [[-78.930467, -7.352517], [-78.930377, -7.352457]] } },
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Pozo 7 - Válvula 3" }, "geometry": { "type": "LineString", "coordinates": [[-78.930437, -7.352497], [-78.930377, -7.352457]] } },
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Pozo 8 - Válvula 3" }, "geometry": { "type": "LineString", "coordinates": [[-78.930407, -7.352477], [-78.930377, -7.352457]] } },
     
-        { "type": "Feature", "properties": { "type": "Tanque", "name": "Tanque Norte" }, "geometry": { "type": "Point", "coordinates": [-78.930700, -7.352500] } },
-        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 9" }, "geometry": { "type": "Point", "coordinates": [-78.930710, -7.352490] } },
-        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 10" }, "geometry": { "type": "Point", "coordinates": [-78.930720, -7.352480] } },
-        { "type": "Feature", "properties": { "type": "Válvula", "name": "Válvula 4" }, "geometry": { "type": "Point", "coordinates": [-78.930730, -7.352470] } },
+        // Tanque Norte
+        { "type": "Feature", "properties": { "type": "Tanque", "name": "Tanque Norte" }, "geometry": { "type": "Point", "coordinates": [-78.930807, -7.352477] } },
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 9" }, "geometry": { "type": "Point", "coordinates": [-78.930837, -7.352447] } },
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 10" }, "geometry": { "type": "Point", "coordinates": [-78.930867, -7.352417] } },
+        { "type": "Feature", "properties": { "type": "Válvula", "name": "Válvula 4" }, "geometry": { "type": "Point", "coordinates": [-78.930897, -7.352387] } },
     
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Norte - Pozo 9" }, "geometry": { "type": "LineString", "coordinates": [[-78.930700, -7.352500], [-78.930710, -7.352490]] } },
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Norte - Pozo 10" }, "geometry": { "type": "LineString", "coordinates": [[-78.930700, -7.352500], [-78.930720, -7.352480]] } },
-        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Norte - Válvula 4" }, "geometry": { "type": "LineString", "coordinates": [[-78.930700, -7.352500], [-78.930730, -7.352470]] } }
+        // Tuberías Tanque Norte
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Norte - Pozo 9" }, "geometry": { "type": "LineString", "coordinates": [[-78.930807, -7.352477], [-78.930837, -7.352447]] } },
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Norte - Pozo 10" }, "geometry": { "type": "LineString", "coordinates": [[-78.930807, -7.352477], [-78.930867, -7.352417]] } },
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque Norte - Válvula 4" }, "geometry": { "type": "LineString", "coordinates": [[-78.930807, -7.352477], [-78.930897, -7.352387]] } }
       ]
     };
     const camera = document.querySelector('[gps-new-camera]');

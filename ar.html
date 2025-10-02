@@ -114,30 +114,42 @@
             const [lon1, lat1] = coords[i];
             const [lon2, lat2] = coords[i + 1];
         
-            // Distancia aproximada en metros
-            const dx = gpsToMeters(lat1, lon1, lat1, lon2); 
-            const dz = gpsToMeters(lat1, lon1, lat2, lon1); 
-            const length = Math.sqrt(dx * dx + dz * dz);
+            // Distancia en metros
+            const length = gpsToMeters(lat1, lon1, lat2, lon2);
         
-            // Punto medio en GPS
+            // Punto medio en GPS (para posicionar el cilindro)
             const midLat = (lat1 + lat2) / 2;
             const midLon = (lon1 + lon2) / 2;
-
-            const angle = Math.atan2(dz, dx) * (180 / Math.PI);
+        
+            // Diferencias para calcular ángulo
+            const dx = lon2 - lon1;
+            const dz = lat2 - lat1;
+        
+            // Ángulo horizontal en grados
+            const angleY = Math.atan2(dz, dx) * (180 / Math.PI);
         
             // Entidad padre para orientación
             const entity = document.createElement("a-entity");
-            entity.setAttribute("gps-new-entity-place", `latitude: ${midLat}; longitude: ${midLon}`);
-            entity.setAttribute("look-at", `[gps-new-entity-place='latitude: ${lat2}; longitude: ${lon2}']`);
+            entity.setAttribute(
+              "gps-new-entity-place",
+              `latitude: ${midLat}; longitude: ${midLon}`
+            );
+            entity.setAttribute(
+              "look-at",
+              `[gps-new-entity-place='latitude: ${lat2}; longitude: ${lon2}']`
+            );
         
-            // Cilindro dentro del padre
+            // Cilindro que representa la tubería
             const cylinder = document.createElement("a-cylinder");
-            cylinder.setAttribute("radius", 0.02);   // grosor
+            cylinder.setAttribute("radius", 0.05);   // grosor
             cylinder.setAttribute("height", length);
             cylinder.setAttribute("color", "red");
-            cylinder.setAttribute("rotation", `90 ${-angle} 0`); // para que se extienda en X-Z
-            entity.appendChild(cylinder);
         
+            // Rotación correcta para que el cilindro apunte de inicio a fin
+            cylinder.setAttribute("rotation", `90 ${angleY} 0`);
+        
+            // Añadimos al padre y a la escena
+            entity.appendChild(cylinder);
             document.querySelector("a-scene").appendChild(entity);
           }
         }

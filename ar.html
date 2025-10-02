@@ -114,30 +114,30 @@
             const [lon1, lat1] = coords[i];
             const [lon2, lat2] = coords[i + 1];
         
-            // Distancias reales en metros
-            const dx = gpsToMeters(lat1, lon1, lat1, lon2); // Este-Oeste
-            const dz = gpsToMeters(lat1, lon1, lat2, lon1); // Norte-Sur
-            const length = Math.sqrt(dx*dx + dz*dz);
-            
-            // Ángulo horizontal correcto
-            const angleY = Math.atan2(dz, dx) * 180 / Math.PI;
-            
-            // Entidad en el punto medio
+            // Distancia aproximada en metros
+            const dx = gpsToMeters(lat1, lon1, lat1, lon2); 
+            const dz = gpsToMeters(lat1, lon1, lat2, lon1); 
+            const length = Math.sqrt(dx * dx + dz * dz);
+        
+            // Punto medio en GPS
             const midLat = (lat1 + lat2) / 2;
             const midLon = (lon1 + lon2) / 2;
-            
+
+            const angle = Math.atan2(dz, dx) * (180 / Math.PI);
+        
+            // Entidad padre para orientación
             const entity = document.createElement("a-entity");
             entity.setAttribute("gps-new-entity-place", `latitude: ${midLat}; longitude: ${midLon}`);
-            
-            // Cilindro
+            entity.setAttribute("look-at", `[gps-new-entity-place='latitude: ${lat2}; longitude: ${lon2}']`);
+        
+            // Cilindro dentro del padre
             const cylinder = document.createElement("a-cylinder");
-            cylinder.setAttribute("radius", 0.05);
+            cylinder.setAttribute("radius", 0.02);   // grosor
             cylinder.setAttribute("height", length);
             cylinder.setAttribute("color", "red");
-            // rotación: 90° X para que crezca hacia adelante + rotación Y hacia el objetivo
-            cylinder.setAttribute("rotation", `90 ${-angleY} 0`);
-            
+            cylinder.setAttribute("rotation", `0 ${angle} 90`); // para que se extienda en X-Z
             entity.appendChild(cylinder);
+        
             document.querySelector("a-scene").appendChild(entity);
           }
         }

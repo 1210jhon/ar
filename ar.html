@@ -109,7 +109,7 @@
         if (f.geometry.type === "LineString") {
           const coords = f.geometry.coordinates;
           for (let i = 0; i < coords.length - 1; i++) {
-            const [lon1, lat1] = coords[i];
+            /*const [lon1, lat1] = coords[i];
             const [lon2, lat2] = coords[i + 1];
         
             // Distancia aproximada en metros
@@ -136,6 +136,38 @@
             cylinder.setAttribute("rotation", `0 ${-angle} 90`); // para que se extienda en X-Z
             entity.appendChild(cylinder);
         
+            document.querySelector("a-scene").appendChild(entity);*/
+            const [lon1, lat1] = coords[i];
+            const [lon2, lat2] = coords[i + 1];
+        
+            // Distancia aproximada en metros
+            const dx = gpsToMeters(lat1, lon1, lat1, lon2); 
+            const dz = gpsToMeters(lat1, lon1, lat2, lon1); 
+            const length = Math.sqrt(dx * dx + dz * dz);
+        
+            // Punto medio en GPS
+            const midLat = (lat1 + lat2) / 2;
+            const midLon = (lon1 + lon2) / 2;
+        
+            // Entidad padre orientada hacia el punto final
+            const entity = document.createElement("a-entity");
+            entity.setAttribute(
+              "gps-new-entity-place",
+              `latitude: ${midLat}; longitude: ${midLon}`
+            );
+            entity.setAttribute(
+              "look-at",
+              `[gps-new-entity-place='latitude: ${lat2}; longitude: ${lon2}']`
+            );
+        
+            // Cilindro dentro del padre
+            const cylinder = document.createElement("a-cylinder");
+            cylinder.setAttribute("radius", 0.05);   // grosor de la tubería
+            cylinder.setAttribute("height", length); // largo = distancia en metros
+            cylinder.setAttribute("color", "red");
+            cylinder.setAttribute("rotation", "90 0 0"); // ahora crece en Z
+        
+            entity.appendChild(cylinder);
             document.querySelector("a-scene").appendChild(entity);
           }
         }

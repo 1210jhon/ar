@@ -177,12 +177,12 @@
             // Crear cilindro
             const cylinder = document.createElement("a-cylinder");
             cylinder.setAttribute("gps-new-entity-place", `latitude: ${lat1}; longitude: ${lon1}`);
-            cylinder.setAttribute("radius", 0.05); // grosor de la "línea" (0.2 m = 20 cm)
+            cylinder.setAttribute("radius", 0.02); // grosor de la "línea" (0.2 m = 20 cm)
             cylinder.setAttribute("height", length); // longitud del cilindro
             cylinder.setAttribute("color", "red");
         
             // Posicionar en medio del segmento
-            cylinder.setAttribute("position", `0 ${length / 2} 0`);
+            cylinder.setAttribute("position", `0 0 0`);
         
             // Calcular rotación del cilindro para alinearlo
             const angle = Math.atan2(dz, dx) * (180 / Math.PI);

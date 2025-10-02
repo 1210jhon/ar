@@ -33,75 +33,116 @@
   <script>
     // GeoJSON con puntos y tuberías
     const geojson = {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": { "type": "Tanque", "name": "Tanque Principal" },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-78.930637, -7.352577] // posición inicial
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": { "type": "Pozo", "name": "Pozo 1" },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-78.930637, -7.352567] // ~1 m al norte
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": { "type": "Válvula", "name": "Válvula 1" },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-78.930627, -7.352577] // ~1 m al este
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": { "type": "Pozo", "name": "Pozo 2" },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-78.930647, -7.352577] // ~1 m al oeste
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": { "type": "Tubería", "name": "Conexión Tanque - Pozo 1" },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [-78.930637, -7.352577],
-          [-78.930637, -7.352567]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": { "type": "Tubería", "name": "Conexión Tanque - Válvula 1" },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [-78.930637, -7.352577],
-          [-78.930627, -7.352577]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": { "type": "Tubería", "name": "Conexión Tanque - Pozo 2" },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [-78.930637, -7.352577],
-          [-78.930647, -7.352577]
-        ]
-      }
-    }
-  ]
-};
+      "type": "FeatureCollection",
+      "features": [
+        // --- Puntos principales ---
+        {
+          "type": "Feature",
+          "properties": { "type": "Tanque", "name": "Tanque Principal" },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [-78.930637, -7.352577] // posición inicial
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": { "type": "Pozo", "name": "Pozo 1" },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [-78.930637, -7.352467] // ~12 m al norte
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": { "type": "Pozo", "name": "Pozo 2" },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [-78.930637, -7.352687] // ~12 m al sur
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": { "type": "Válvula", "name": "Válvula 1" },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [-78.930527, -7.352577] // ~12 m al este
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": { "type": "Válvula", "name": "Válvula 2" },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [-78.930747, -7.352577] // ~12 m al oeste
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": { "type": "Tanque", "name": "Tanque Secundario" },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [-78.930637, -7.352377] // ~22 m al norte
+          }
+        },
+    
+        // --- Conexiones (Tuberías) ---
+        {
+          "type": "Feature",
+          "properties": { "type": "Tubería", "name": "Tanque - Pozo 1" },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [-78.930637, -7.352577],
+              [-78.930637, -7.352467]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": { "type": "Tubería", "name": "Tanque - Pozo 2" },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [-78.930637, -7.352577],
+              [-78.930637, -7.352687]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": { "type": "Tubería", "name": "Tanque - Válvula 1" },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [-78.930637, -7.352577],
+              [-78.930527, -7.352577]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": { "type": "Tubería", "name": "Tanque - Válvula 2" },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [-78.930637, -7.352577],
+              [-78.930747, -7.352577]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": { "type": "Tubería", "name": "Tanque - Tanque Secundario" },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [-78.930637, -7.352577],
+              [-78.930637, -7.352377]
+            ]
+          }
+        }
+      ]
+    };
     const camera = document.querySelector('[gps-new-camera]');
     const coordsDiv = document.getElementById('coords');
 

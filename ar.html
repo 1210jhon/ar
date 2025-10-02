@@ -151,7 +151,7 @@
           el.setAttribute("color", "blue");
           //el.setAttribute("scale", "5 5 5");
           el.setAttribute("width", "0.3");   // 30 cm de ancho
-          el.setAttribute("height", "0.3");  // 30 cm de alto
+          el.setAttribute("height", "0.5");  // 30 cm de alto
           el.setAttribute("depth", "0.3");   // 30 cm de profundidad
           document.querySelector("a-scene").appendChild(el);
         }
@@ -177,7 +177,7 @@
             // Crear cilindro
             const cylinder = document.createElement("a-cylinder");
             cylinder.setAttribute("gps-new-entity-place", `latitude: ${lat1}; longitude: ${lon1}`);
-            cylinder.setAttribute("radius", 0.2); // grosor de la "línea" (0.2 m = 20 cm)
+            cylinder.setAttribute("radius", 0.05); // grosor de la "línea" (0.2 m = 20 cm)
             cylinder.setAttribute("height", length); // longitud del cilindro
             cylinder.setAttribute("color", "red");
         

@@ -116,24 +116,6 @@
       return R * c; // distancia en m
     }
 
-    function drawCylinderBetweenPoints(lat1, lon1, lat2, lon2, radius = 0.2, color = "red") {
-    // Convertir coordenadas GPS a metros relativos (simplificado)
-    const dx = gpsToMeters(lat1, lon1, lat1, lon2);
-    const dz = gpsToMeters(lat1, lon1, lat2, lon1);
-    const length = Math.sqrt(dx*dx + dz*dz);
-  
-    const cylinder = document.createElement("a-cylinder");
-    cylinder.setAttribute("gps-new-entity-place", `latitude: ${lat1}; longitude: ${lon1}`);
-    cylinder.setAttribute("radius", radius);        // grosor en metros
-    cylinder.setAttribute("height", length);        // largo
-    cylinder.setAttribute("color", color);
-  
-    // Posicionamos en el medio de los dos puntos
-    cylinder.setAttribute("position", `0 ${length/2} 0`);
-    cylinder.setAttribute("rotation", `90 0 ${Math.atan2(dz, dx) * (180/Math.PI)}`);
-  
-    document.querySelector("a-scene").appendChild(cylinder);
-  }
 
     camera.addEventListener('gps-camera-update-position', e => {
       const lat = e.detail.position.latitude.toFixed(6);
@@ -159,32 +141,28 @@
         if (f.geometry.type === "LineString") {
           const coords = f.geometry.coordinates;
           for (let i = 0; i < coords.length - 1; i++) {
-            const [lon1, lat1] = coords[i];
             const [lon2, lat2] = coords[i + 1];
-  
-            // Calcular distancia aproximada en metros
+        
+            // Distancia en metros en X/Z
             const dx = gpsToMeters(lat1, lon1, lat1, lon2); 
             const dz = gpsToMeters(lat1, lon1, lat2, lon1); 
-  
-            // Crear entidad en el primer punto
-           /* const line = document.createElement("a-entity");
-            line.setAttribute("gps-new-entity-place", `latitude: ${lat1}; longitude: ${lon1}`);
-            line.setAttribute("line", `start: 0 0 0; end: ${dx} 0 ${-dy}; color: red; opacity: 1;`);
-            document.querySelector("a-scene").appendChild(line);
-            */
             const length = Math.sqrt(dx * dx + dz * dz);
-
+        
+            // Punto medio
+            const midX = dx / 2;
+            const midZ = dz / 2;
+        
             // Crear cilindro
             const cylinder = document.createElement("a-cylinder");
             cylinder.setAttribute("gps-new-entity-place", `latitude: ${lat1}; longitude: ${lon1}`);
-            cylinder.setAttribute("radius", 0.02); // grosor de la "línea" (0.2 m = 20 cm)
-            cylinder.setAttribute("height", length); // longitud del cilindro
+            cylinder.setAttribute("radius", 0.1); // grosor de la tubería (10 cm)
+            cylinder.setAttribute("height", length); 
             cylinder.setAttribute("color", "red");
         
-            // Posicionar en medio del segmento
-            cylinder.setAttribute("position", `0 0 0`);
+            // Colocar el cilindro en el punto medio
+            cylinder.setAttribute("position", `${midX} ${length/2} ${-midZ}`);
         
-            // Calcular rotación del cilindro para alinearlo
+            // Rotación correcta
             const angle = Math.atan2(dz, dx) * (180 / Math.PI);
             cylinder.setAttribute("rotation", `0 ${-angle} 90`);
         

@@ -152,6 +152,8 @@
             // Punto medio en GPS
             const midLat = (lat1 + lat2) / 2;
             const midLon = (lon1 + lon2) / 2;
+
+            const angle = Math.atan2(dz, dx) * (180 / Math.PI);
         
             // Entidad padre para orientación
             const entity = document.createElement("a-entity");
@@ -163,7 +165,7 @@
             cylinder.setAttribute("radius", 0.02);   // grosor
             cylinder.setAttribute("height", length);
             cylinder.setAttribute("color", "red");
-            cylinder.setAttribute("rotation", "0 0 90");; // para que se extienda en X-Z
+            cylinder.setAttribute("rotation", `0 ${-angle} 90`); // para que se extienda en X-Z
             entity.appendChild(cylinder);
         
             document.querySelector("a-scene").appendChild(entity);

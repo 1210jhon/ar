@@ -141,6 +141,7 @@
         if (f.geometry.type === "LineString") {
           const coords = f.geometry.coordinates;
           for (let i = 0; i < coords.length - 1; i++) {
+            const [lon1, lat1] = coords[i];
             const [lon2, lat2] = coords[i + 1];
         
             // Distancia en metros en X/Z

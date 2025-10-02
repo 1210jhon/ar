@@ -85,6 +85,8 @@
     }
 
 
+
+
     camera.addEventListener('gps-camera-update-position', e => {
       const lat = e.detail.position.latitude.toFixed(6);
       const lon = e.detail.position.longitude.toFixed(6);
@@ -141,33 +143,30 @@
             const [lon2, lat2] = coords[i + 1];
         
             // Distancia en metros
-            const dx = gpsToMeters(lat1, lon1, lat1, lon2); 
-            const dz = gpsToMeters(lat1, lon1, lat2, lon1); 
-            const length = Math.sqrt(dx * dx + dz * dz);
+            const length = gpsToMeters(lat1, lon1, lat2, lon2);
         
             // --- Entidad en el punto inicial ---
+            // --- Entidad en el punto medio ---
             const entity = document.createElement("a-entity");
             entity.setAttribute(
               "gps-new-entity-place",
-              `latitude: ${lat1}; longitude: ${lon1}`
+              `latitude: ${midLat}; longitude: ${midLon}`
             );
+            
+            // hacemos que mire hacia el punto final
             entity.setAttribute(
               "look-at",
               `[gps-new-entity-place='latitude: ${lat2}; longitude: ${lon2}']`
             );
-        
+            
             // --- Cilindro ---
             const cylinder = document.createElement("a-cylinder");
             cylinder.setAttribute("radius", 0.05);   // grosor de la tubería
             cylinder.setAttribute("height", length);
             cylinder.setAttribute("color", "red");
-        
-            // rotamos para que crezca en Z
-            cylinder.setAttribute("rotation", "90 0 0");
-        
-            // desplazamos medio largo en Z → conecta bien inicio-fin
-            cylinder.setAttribute("position", `0 0 ${-length/2}`);
-        
+            
+            // ya no hace falta rotation ni position manual
+            
             entity.appendChild(cylinder);
             document.querySelector("a-scene").appendChild(entity);
           }

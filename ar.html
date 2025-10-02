@@ -162,12 +162,12 @@
             const [lon1, lat1] = coords[i];
             const [lon2, lat2] = coords[i + 1];
   
-            /*// Calcular distancia aproximada en metros
+            // Calcular distancia aproximada en metros
             const dx = gpsToMeters(lat1, lon1, lat1, lon2); 
             const dy = gpsToMeters(lat1, lon1, lat2, lon1); 
   
             // Crear entidad en el primer punto
-            const line = document.createElement("a-entity");
+           /* const line = document.createElement("a-entity");
             line.setAttribute("gps-new-entity-place", `latitude: ${lat1}; longitude: ${lon1}`);
             line.setAttribute("line", `start: 0 0 0; end: ${dx} 0 ${-dy}; color: red; opacity: 1;`);
             document.querySelector("a-scene").appendChild(line);

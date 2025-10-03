@@ -20,11 +20,11 @@
   </style>
 </head>
 <body>
-  <a-scene vr-mode-ui="enabled: false"
-           arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false"
-           renderer="antialias: true; alpha: true">
-
-    <a-camera gps-new-camera gps-min-distance="5" rotation-reader></a-camera>
+  <a-scene
+   vr-mode-ui="enabled: false"
+   arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:720; displayWidth:1280; displayHeight:720; videoTexture: true; debugUIEnabled: false"
+   renderer="antialias: true; alpha: true">
+    <a-camera gps-new-camera gps-min-distance="1" rotation-reader></a-camera>
 
   </a-scene>
 

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>CesiumJS GeoJSON Example</title>
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+  <style>
+    html, body, #cesiumContainer {
+      width: 100%; height: 100%; margin: 0; padding: 0;
+      background: #000;
+    }
+    #coords {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      font-family: monospace;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <div id="cesiumContainer"></div>
+  <div id="coords">Esperando coordenadas...</div>
+
+  <script>
+    // Inicializar Cesium
+    Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxMDlmZjhiNS0xMWMyLTQ2ZmQtODQ2NC05MWM4MDE0ZjAxNzEiLCJpZCI6MzQ2OTIyLCJpYXQiOjE3NTk1MDk5MjV9.yfKEa7rK2V0knsFUBDI7ayCQ00LHwqKiE0P25qR0ftQ"; // si usas Ion
+    const viewer = new Cesium.Viewer("cesiumContainer", {
+      terrainProvider: Cesium.createWorldTerrain(),
+      shouldAnimate: true
+    });
+
+    // Tu GeoJSON (copiado del original)
+    const geojson = {
+      "type": "FeatureCollection",
+      "features": [
+        { "type": "Feature", "properties": { "type": "Tanque", "name": "Tanque Principal" }, "geometry": { "type": "Point", "coordinates": [-78.930637, -7.352577] } },
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 1" }, "geometry": { "type": "Point", "coordinates": [-78.930637, -7.352847] } },
+        { "type": "Feature", "properties": { "type": "Válvula", "name": "Válvula 1" }, "geometry": { "type": "Point", "coordinates": [-78.930367, -7.352577] } },
+        { "type": "Feature", "properties": { "type": "Pozo", "name": "Pozo 2" }, "geometry": { "type": "Point", "coordinates": [-78.930907, -7.352577] } },
+
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque - Pozo 1" }, "geometry": { "type": "LineString", "coordinates": [[-78.930637, -7.352577], [-78.930637, -7.352847]] } },
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque - Válvula 1" }, "geometry": { "type": "LineString", "coordinates": [[-78.930637, -7.352577], [-78.930367, -7.352577]] } },
+        { "type": "Feature", "properties": { "type": "Tubería", "name": "Conexión Tanque - Pozo 2" }, "geometry": { "type": "LineString", "coordinates": [[-78.930637, -7.352577], [-78.930907, -7.352577]] } }
+      ]
+    };
+
+    // Función para añadir entidades
+    geojson.features.forEach(f => {
+      if (f.geometry.type === "Point") {
+        const [lon, lat] = f.geometry.coordinates;
+
+        // Crear cubo como en AR.js
+        viewer.entities.add({
+          position: Cesium.Cartesian3.fromDegrees(lon, lat, 5), // altura en metros
+          box: {
+            dimensions: new Cesium.Cartesian3(10, 10, 20), // metros
+            material: Cesium.Color.BLUE.withAlpha(0.8)
+          },
+          label: {
+            text: f.properties.name,
+            font: "14px sans-serif",
+            fillColor: Cesium.Color.WHITE,
+            outlineColor: Cesium.Color.BLACK,
+            outlineWidth: 2,
+            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+            verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+            pixelOffset: new Cesium.Cartesian2(0, -20)
+          }
+        });
+      }
+
+      if (f.geometry.type === "LineString") {
+        const positions = f.geometry.coordinates.map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1], 5));
+        viewer.entities.add({
+          polyline: {
+            positions: positions,
+            width: 3,
+            material: Cesium.Color.RED
+          }
+        });
+      }
+    });
+
+    // Centrar vista en la zona
+    viewer.zoomTo(viewer.entities);
+
+    // Mostrar coordenadas al mover el mouse
+    const coordsDiv = document.getElementById("coords");
+    const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+    handler.setInputAction(function (movement) {
+      const cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
+      if (cartesian) {
+        const cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+        const lat = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
+        const lon = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
+        coordsDiv.textContent = `Lat: ${lat}, Lon: ${lon}`;
+      }
+    }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+  </script>
+</body>
+</html>
